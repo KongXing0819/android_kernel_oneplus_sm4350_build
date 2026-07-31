@@ -48,7 +48,11 @@ jobs:
       - name: Extract .config from boot.img
         run: |
           wget https://mirrorbits.lineageos.org/full/dre/2026${{ inputs.boot_version }}/boot.img
-          mkdir build
+          if [ ! -d "build" ];then
+            mkdir builf
+            else
+            echo "build已经存在"
+          fi
           ./scripts/extract-ikconfig boot.img | tee build/.config
           rm boot.img
 
