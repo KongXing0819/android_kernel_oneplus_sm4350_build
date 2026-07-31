@@ -1,4 +1,4 @@
-name: Build LineageOS Official Kernel
+-name: Build LineageOS Official Kernel
 
 on:
   workflow_dispatch:
@@ -49,8 +49,14 @@ jobs:
         run: |
           wget https://mirrorbits.lineageos.org/full/dre/2026${{ inputs.boot_version }}/boot.img
           mkdir build
-          ./scripts/extract-ikconfig boot.img > build/.config
+          ./scripts/extract-ikconfig boot.img | tee build/.config
           rm boot.img
+
+      - name: Upload Config Before Build
+        uses: actions/upload-artifact@v7
+        with:
+          name: config_origin
+          path: build/.config
 
       - name: Build Kernel
         run: |
@@ -60,11 +66,11 @@ jobs:
             CROSS_COMPILE=aarch64-linux-android- \
             -j$(nproc --all)
 
-      - name: Upload Config
+      - name: Upload Config After Build
         uses: actions/upload-artifact@v7
         with:
+          name: config
           path: build/.config
-          archive: false
 
       - name: Upload Kernel
         uses: actions/upload-artifact@v7
