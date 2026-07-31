@@ -57,6 +57,7 @@ jobs:
         with:
           name: config_origin
           path: build/.config
+          include-hidden-files: true
 
       - name: Build Kernel
         run: |
@@ -71,6 +72,7 @@ jobs:
         with:
           name: config
           path: build/.config
+          include-hidden-files: true
 
       - name: Upload Kernel
         uses: actions/upload-artifact@v7
