@@ -1,4 +1,4 @@
--name: Build LineageOS Official Kernel
+name: Build LineageOS Official Kernel
 
 on:
   workflow_dispatch:
