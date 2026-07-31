@@ -48,7 +48,7 @@ jobs:
       - name: Extract .config from boot.img
         run: |
           wget https://mirrorbits.lineageos.org/full/dre/2026${{ inputs.boot_version }}/boot.img -o ../boot.img
-          md build
+          mkdir build
           ./scripts/extract-ikconfig ../boot.img > build/.config
 
       - name: Build Kernel
