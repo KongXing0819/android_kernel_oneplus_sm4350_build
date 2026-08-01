@@ -48,6 +48,14 @@ jobs:
           echo "NDK_HOME=$PWD/android-ndk-r29" >> $GITHUB_ENV
           echo "$PWD/android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64/bin" >> $GITHUB_PATH
 
+      - name: Download and Apply Patch
+        run: |
+          sudo apt-get update
+
+      - name: Add KernelSU
+        run: |
+          sudo apt-get update
+
       - name: Extract .config from boot.img
         run: |
           wget https://mirrorbits.lineageos.org/full/dre/2026${{ inputs.boot_version }}/boot.img
